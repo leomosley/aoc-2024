@@ -25,15 +25,15 @@ def safe(l: list[int]) -> bool:
   return True
 
 def safe_with_dampener(l: list[int]) -> bool:
-    if safe(l):
+  if safe(l):
+    return True
+
+  for i in range(len(l)):
+    temp = l[:i] + l[i + 1:]  
+    if safe(temp):
       return True
 
-    for i in range(len(l)):
-      temp = l[:i] + l[i + 1:]  
-      if safe(temp):
-        return True
-
-    return False
+  return False
 
 total_safe = 0
 
