@@ -39,13 +39,26 @@ with open("3/input.txt", "r") as file:
 
   i = 0
   total = 0
-  while i < len(content) - 3:
-    if content[i:i + 3] == "mul":
-      result, new_index = get_mul(content, i + 3)
-      if result is not None:
-        total += result
-        i = new_index
-        continue
-    i += 1
 
+  enabled = True
+
+  while i < len(content) - 3:
+    if enabled:
+      if content[i:i+7] == "don't()":
+        enabled = False
+        continue
+
+      if content[i:i + 3] == "mul":
+        result, new_index = get_mul(content, i + 3)
+        if result is not None:
+          total += result
+          i = new_index
+          continue
+
+    else:
+      if content[i:i+4] == "do()":
+        enabled = True
+
+    i += 1
+    
   print(total)
